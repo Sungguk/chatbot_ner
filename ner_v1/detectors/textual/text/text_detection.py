@@ -200,7 +200,6 @@ class TextDetector(BaseDetector):
         self.tagged_text = self.processed_text
 
         text_entity_data = self._text_detection_with_variants()
-
         self.text_entity = text_entity_data[0]
         self.original_text_entity = text_entity_data[1]
         return text_entity_data
@@ -223,7 +222,10 @@ class TextDetector(BaseDetector):
         tokens = tokenizer.tokenize(self.processed_text)
         message = u' '.join(tokens)
         variants = self.db.get_similar_dictionary(self.entity_name, message,
-                                                  self._fuzziness, search_language_script=self._target_language_script)
+                                                  fuzziness_threshold=self._fuzziness)
+
+        #variants = self.db.get_similar_dictionary(self.entity_name, message,
+        #                                          self._fuzziness, search_language_script=self._target_language_script)
         variant_dictionary.update(variants)
         variant_list = variant_dictionary.keys()
 

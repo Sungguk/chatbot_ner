@@ -4,7 +4,7 @@ import logging.handlers
 from requests_aws4auth import AWS4Auth
 from elasticsearch import RequestsHttpConnection
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CONFIG_PATH = os.path.join(BASE_DIR, 'config')
 MODEL_CONFIG_PATH = os.path.join(BASE_DIR, 'model_config')
 
